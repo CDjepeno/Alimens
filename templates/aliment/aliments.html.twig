@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AlimentController!{% endblock %}
+
+{% block monTitre %}Liste des aliments{% endblock %}  
+{% block body %}
+    <a href="{{ path('alimentParCalorie', { 'calories' : 50}) }}">
+        Aliments avec moins de 50 calories au 100g
+    </a>
+<div class="row">
+    {% for aliment in aliments %}
+    {% include "partials/_aliment.html.twig" %}
+    {% endfor %}
+</div>
+{% endblock %}

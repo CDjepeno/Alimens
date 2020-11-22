@@ -6,4 +6,10 @@ body {
     width: 15rem;
     height: 12rem;
     object-fit: cover;
+
+    &.perso_imgAliment-table {
+        height: 8rem;
+        width: 10rem;
+        object-fit: cover;
+    }
 }

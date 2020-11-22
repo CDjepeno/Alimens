@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modification d'aliment{% endblock %}
+
+{% block monTitre %}
+    {% if isModification %}
+    Modification {{ aliment.name }}
+    {% else %}
+    Ajout d'un aliment
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+    {% if isModification %}
+    <button type="submit" class="btn btn-primary">Modifier </button>
+    {% else %}
+    <button type="submit" class="btn btn-primary">Ajouter </button>
+    {% endif %}
+    {{ form_end(form) }}
+</div>
+{% endblock %}

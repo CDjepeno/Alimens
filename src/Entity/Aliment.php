@@ -3,10 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\AlimentRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=AlimentRepository::class)
+ * @UniqueEntity(fields={"name"}, message="Un aliment as déja ce nom")
+ * @Vich\Uploadable
  */
 class Aliment
 {
@@ -19,36 +24,51 @@ class Aliment
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=3, max=15, minMessage="Le nom doit être supérieur a 3 caractères", maxMessage="Le nom doit être inférieur à 15 caractères")
      */
     private $name;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\Range(min=0.1, max=100, minMessage="Le prix doit être supérieur a 0.1", maxMessage="Le prix doit être inférieur à 100")
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="vous devez renseigner l'image")
      */
     private $image;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Vich\UploadableField(mapping="aliment_image", fileNameProperty="image")
      */
-    private $calorie;
+    private $imageFile;
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="vous devez renseigner les calories")
+     * @Assert\Positive(message="le chiffre doit être positif")
+     */
+    private $calory;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="vous devez renseigner les proteines")
+     * @Assert\Positive(message="le chiffre doit être positif")
      */
     private $proteine;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="vous devez renseigner les glucides")
+     * @Assert\Positive(message="le chiffre doit être positif")
      */
     private $glucide;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank(message="vous devez renseigner les lipides")
+     * @Assert\Positive(message="le chiffre doit être positif")
      */
     private $lipide;
 
@@ -93,14 +113,14 @@ class Aliment
         return $this;
     }
 
-    public function getCalorie(): ?int
+    public function getCalory(): ?int
     {
-        return $this->calorie;
+        return $this->calory;
     }
 
-    public function setCalorie(int $calorie): self
+    public function setCalory(int $calory): self
     {
-        $this->calorie = $calorie;
+        $this->calory = $calory;
 
         return $this;
     }
@@ -137,6 +157,26 @@ class Aliment
     public function setLipide(float $lipide): self
     {
         $this->lipide = $lipide;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageFile
+     */ 
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set the value of imageFile
+     *
+     * @return  self
+     */ 
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
 
         return $this;
     }

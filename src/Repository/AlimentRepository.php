@@ -25,11 +25,11 @@ class AlimentRepository extends ServiceEntityRepository
      * 
      * @return Aliment[] Returns an array of Aliment objects
      */
-    public function getAlimentMinCalorie($calorie)
+    public function getAlimentPerProperty($property, $signe,$value)
     {
         return $this->createQueryBuilder('a')
-            ->andwhere('a.calorie < :val')
-            ->setParameter('val', $calorie )
+            ->andwhere('a.'. $property. $signe .':val')
+            ->setParameter('val', $value )
             ->getQuery()
             ->getResult()
         ;

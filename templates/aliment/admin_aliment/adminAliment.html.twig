@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin aliments{% endblock %}
+
+{% block monTitre %}Administration des aliments{% endblock %}
+{% block body %}
+{% for label,messages in app.flashes %}
+    <div class="container">
+        <div class="alert alert-{{label}}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+<a href="{{ path('admin_aliment_add') }}" class="btn btn-success my-2">Ajouter</a>
+<table class="table table-hover">
+    <thead>
+        <tr class="thead-dark">
+            <th>Image</th>
+            <th>Aliments</th>
+            <th>Prix</th>
+            <th>Calories</th>
+            <th>Proteines</th>
+            <th>Glucides</th>
+            <th>Lipides</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for aliment in aliments %}
+        <tr>
+            <td><img src="{{asset('build/images/' ~ aliment.image)}}" class="perso_imgAliment perso_imgAliment-table" alt="{{aliment.name}}"></td>
+            <td><strong>{{aliment.name}}</strong></td>
+            <td>{{aliment.price}}</td>
+            <td>{{aliment.calory}}</td>
+            <td>{{aliment.proteine}}</td>
+            <td>{{aliment.glucide}}</td>
+            <td>{{aliment.lipide}}</td>
+            <td>
+                <a href="{{ path('admin_aliment_update', {id : aliment.id}) }}" class="btn btn-secondary">modifier</a>
+
+                <form method="POST" style="display:inline-block" action="{{ path('admin_aliment_delete', {id:aliment.id}) }} onsubmit="return confirm('Confirmer la suppression')"">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ aliment.id)}}">
+                    <input type="submit" class="btn btn-danger" value="supprimer" >
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

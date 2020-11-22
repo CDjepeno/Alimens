@@ -1,15 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello AlimentController!{% endblock %}
+{% block monTitre %}
+    Liste des aliments
+    {% if isCalory %}
+    avec moins de 50 calories
+    {% elseif isGlucide %}
+    avec moins de 5 glucides
+    {% endif %}
+{% endblock %}  
 
-{% block monTitre %}Liste des aliments{% endblock %}  
 {% block body %}
-    <a href="{{ path('alimentParCalorie', { 'calories' : 50}) }}">
-        Aliments avec moins de 50 calories au 100g
-    </a>
-<div class="row">
-    {% for aliment in aliments %}
-    {% include "partials/_aliment.html.twig" %}
-    {% endfor %}
-</div>
+    <div class="m-1">
+        <a href="{{ path('aliments') }}" class="btn btn-primary my-3">Tous les aliments</a>
+        <a href="{{ path('alimentsParCalories', { 'calories' : 50}) }}" class="btn btn-primary my-3">
+            Aliments avec moins de 50 calories au 100g
+        </a>
+        <a href="{{ path('alimentsParGlucides', { 'glucides' : 5}) }}" class="btn btn-primary my-3">
+            Aliments avec moins de 5 glucides au 100g
+        </a>
+    </div>
+    <div class="row">
+        {% for aliment in aliments %}
+            {% include "partials/_aliment.html.twig" %}
+        {% endfor %}
+    </div>
 {% endblock %}

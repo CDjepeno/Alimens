@@ -6,6 +6,8 @@ use App\Repository\AlimentRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -36,12 +38,12 @@ class Aliment
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="vous devez renseigner l'image")
      */
     private $image;
 
     /**
      * @Vich\UploadableField(mapping="aliment_image", fileNameProperty="image")
+     * @var File|null
      */
     private $imageFile;
     /**
@@ -71,6 +73,11 @@ class Aliment
      * @Assert\Positive(message="le chiffre doit être positif")
      */
     private $lipide;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
 
     public function getId(): ?int
     {
@@ -106,7 +113,7 @@ class Aliment
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
@@ -174,9 +181,25 @@ class Aliment
      *
      * @return  self
      */ 
-    public function setImageFile($imageFile)
+    public function setImageFile(?File $imageFile = null): self
     {
         $this->imageFile = $imageFile;
+
+        if($this->imageFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }

@@ -19,6 +19,7 @@
         <tr class="thead-dark">
             <th>Image</th>
             <th>Aliments</th>
+            <th>Type</th>
             <th>Prix</th>
             <th>Calories</th>
             <th>Proteines</th>
@@ -32,6 +33,7 @@
         <tr>
             <td><img src="{{asset('build/images/' ~ aliment.image)}}" class="perso_imgAliment perso_imgAliment-table" alt="{{aliment.name}}"></td>
             <td><strong>{{aliment.name}}</strong></td>
+            <td>{{aliment.type.name}}</td>
             <td>{{aliment.price}}</td>
             <td>{{aliment.calory}}</td>
             <td>{{aliment.proteine}}</td>
@@ -40,7 +42,7 @@
             <td>
                 <a href="{{ path('admin_aliment_update', {id : aliment.id}) }}" class="btn btn-secondary">modifier</a>
 
-                <form method="POST" style="display:inline-block" action="{{ path('admin_aliment_delete', {id:aliment.id}) }} onsubmit="return confirm('Confirmer la suppression')"">
+                <form method="POST" style="display:inline-block" action="{{ path('admin_aliment_delete', {id:aliment.id}) }}" onsubmit="return confirm('Confirmer la suppression')">
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ aliment.id)}}">
                     <input type="submit" class="btn btn-danger" value="supprimer" >

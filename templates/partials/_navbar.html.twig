@@ -6,19 +6,22 @@
 
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
-      <li>
-        <a class="nav-link" href="{{ path('aliments') }}">Aliments</a>
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">aliment</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{ path('aliments')}}">Aliments</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{ path('admin_aliments')}}">Administration</a>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path('admin_aliments')}}">Administration</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Types</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{ path('types') }}">Types</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{ path('admin_type') }}">Administration</a>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-   
     </ul>
    
   </div>

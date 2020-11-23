@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des types{% endblock %}
+
+{% block monTitre %}Liste des types{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row align-items-center mt-5">
+        {% for type in types %}
+            <div class="col-2">
+                <img src="{{ asset('build/images/types/' ~ type.image ) }}" alt="{{type.name}}" class="perso_imgAliment perso_imgAliment-table">
+            </div>
+            <div class="col-4">
+                {{type.name}}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

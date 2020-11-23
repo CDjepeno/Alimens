@@ -65,5 +65,19 @@ class AlimentController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet de récupérer les fruits
+     *
+     * 
+     * 
+     * @param AlimentRepository $aliment
+     * @return Response
+     */
+    public function fruits(AlimentRepository $aliment): Response
+    {
+        $a = $aliment->getAlimentByType('fruits');
+        dd($a);
+    }
+
 
 }

@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {% if isUpdate %}            
+    Modification du type
+    {% else %}
+    Ajout d'un type
+    {% endif %}
+{% endblock %}
+
+{% block monTitre %}
+    {% if isUpdate %}
+    Modification {{ type.name }}
+    {% else %}
+    Ajout d'un type
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+    {% if isUpdate %}
+    <button type="submit" class="btn btn-primary">Modifier </button>
+    {% else %}
+    <button type="submit" class="btn btn-primary">Ajouter </button>
+    {% endif %}
+    {{ form_end(form) }}
+</div>
+{% endblock %}

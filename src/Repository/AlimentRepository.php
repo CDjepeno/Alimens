@@ -34,6 +34,22 @@ class AlimentRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * Permet de récupérer des aliments en fonction de leurs type
+     *
+     * @param [string] $value
+     * @return void
+     */
+    public function getAlimentByType($value)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere("a.type = :val")
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 
     /*

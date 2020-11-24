@@ -18,6 +18,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
      */
     private $id;
 
@@ -38,6 +39,11 @@ class User implements UserInterface
      * @Assert\EqualTo(propertyPath="password", message="Le mot de passe ne correspond pas")
      */
     private $checkPassword;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $role;
 
     public function getId(): ?int
     {
@@ -103,6 +109,22 @@ class User implements UserInterface
 
     public function eraseCredentials(){
         // ..
+    }
+
+    public function getRole(): ?string
+    {
+        return [$this->role];
+    }
+
+    public function setRole(?string $role): self
+    {
+        if ($role === null) {
+            $this->role = "ROLE_USER";
+        } else {
+            $this->role = $role;
+        }
+
+        return $this;
     }
 
 

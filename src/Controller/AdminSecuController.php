@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AdminSecuController extends AbstractController
 {
@@ -46,8 +47,32 @@ class AdminSecuController extends AbstractController
         ]);
     }
 
-    // public function login(EntityManagerInterface $manager)
-    // {
+    /**
+     * Permet de logger un utilisateur
+     *
+     * @Route("/login", name="login")
+     * 
+     * @param EntityManagerInterface $manager
+     * 
+     * @return Response
+     */
+    public function login(AuthenticationUtils $authUtils)
+    {
+        return $this->render('admin_secu/login.html.twig',[
+            'last_username' => $authUtils->getLastUsername(), 
+            'error'         => $authUtils->getLastAuthenticationError()
+        ]);
+    }
 
-    // }
+    /**
+     * Permet de se déconnecter
+     *
+     * @Route("/logout", name="logout")
+     * 
+     * @return void
+     */
+    public function logout()
+    {
+
+    }
 }

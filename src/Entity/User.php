@@ -96,7 +96,7 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        return [$this->role];
     }
 
     public function getSalt(){
@@ -116,6 +116,8 @@ class User implements UserInterface
         return [$this->role];
     }
 
+    /**
+     */
     public function setRole(?string $role): self
     {
         if ($role === null) {

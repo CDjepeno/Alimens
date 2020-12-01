@@ -9,7 +9,7 @@
     <div class="row align-items-center mt-5">
         {% for type in types %}
             <div class="col-2">
-                <img src="{{ asset('build/images/types/' ~ type.image ) }}" alt="{{type.name}}" class="perso_imgAliment perso_imgAliment-table">
+                <img src="{{ asset('build/images/' ~ type.image ) }}" alt="{{type.name}}" class="perso_imgAliment perso_imgAliment-table">
             </div>
             <div class="col-4">
                 {{type.name}}
